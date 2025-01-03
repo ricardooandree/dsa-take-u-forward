@@ -62,7 +62,7 @@ public class Patterns {
 
     public static void pattern_5(int rows){
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j <= 5 - i - 1; j++){
+            for (int j = i; j < rows; j++){
                 System.out.print("*");
             }
             System.out.println();
@@ -71,7 +71,7 @@ public class Patterns {
 
     public static void pattern_6(int rows){
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j <= 5 - i - 1; j++){
+            for (int j = 0; j < rows - i; j++){
                 System.out.print(j + 1);
             }
             System.out.println();
@@ -79,17 +79,17 @@ public class Patterns {
     }
 
     public static void pattern_7(int rows){
-        int n;
+        int n = -1;
         for (int i = 0; i < rows; i++){
-            if ((i + 1) % 2 == 0){
+            if (i % 2 == 0){
                 n = 1;
             } else {
                 n = 0;
             }
-            
-            for (int j = 0; j < i + 1; j++){
-                n = 1 - n;
+
+            for (int j = 0; j <= i; j++){
                 System.out.print(n);
+                n = 1 - n;
             }
             System.out.println();
         }
@@ -97,10 +97,9 @@ public class Patterns {
 
     public static void pattern_8(int rows){
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
+            for (int j = 0; j <= i; j++){
                 System.out.print((char)('A' + j));
             }
-
             System.out.println();
         }
     }
@@ -110,17 +109,15 @@ public class Patterns {
             for (int j = 0; j < rows - i; j++){
                 System.out.print((char)('A' + j));
             }
-
             System.out.println();
         }
     }
 
     public static void pattern_10(int rows){
-        for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
-                System.out.print((char)('A' + i));
+        for(int i = 0; i < rows; i++){
+            for (int j = 0; j <= i; j++){
+                System.out.print((char)(i + 'A'));
             }
-
             System.out.println();
         }
     }
@@ -140,19 +137,17 @@ public class Patterns {
             }
 
             for (int j = 0; j < rows - i - 1; j++){
-                System.out.print(" ");
+                System.out.print("");
             }
-
             System.out.println();
         }
     }
 
     public static void pattern_12(int rows){
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
-                System.out.print((char)('A' + rows - 1 - i + j));
+            for (int j = 0; j <= i; j++){
+                System.out.print((char)('A' + rows - 1 + j - i));
             }
-
             System.out.println();
         }
     }
@@ -166,7 +161,7 @@ public class Patterns {
             for (int j = 0; j < 2 * i + 1; j++){
                 System.out.print("*");
             }
-            
+
             for (int j = 0; j < rows - i - 1; j++){
                 System.out.print(" ");
             }
@@ -188,49 +183,52 @@ public class Patterns {
             for (int j = 0; j < i; j++){
                 System.out.print(" ");
             }
+            
             System.out.println();
         }
     }
 
     public static void pattern_15(int rows){
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
+            for (int j = 0; j <= i; j++){
                 System.out.print(j + 1);
             }
 
             for (int j = 0; j < 2 * (rows - i - 1); j++){
-                System.out.print("o");
+                System.out.print(" ");
             }
 
-            for (int j = i + 1; j > 0; j--){
-                System.out.print(j);
+            for (int j = 0; j <= i; j++){
+                System.out.print(i + 1 - j);
             }
-
+            
             System.out.println();
         }
     }
 
     public static void pattern_16(int rows){
-        int n = 1;
+        int n = 0;
+
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
-                System.out.print(n + " ");
-                n++;
+            for (int j = 0; j <= i; j++){
+                n += 1;
+                System.out.print(n);
             }
+
             System.out.println();
         }
     }
     
     public static void pattern_17(int rows){
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
+            for (int j = 0; j <= i; j++){
                 System.out.print("*");
             }
             System.out.println();
         }
 
-        for (int i = 1; i < rows; i++){
-            for (int j = 0; j < rows - i; j++){
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < rows - i - 1; j++){
                 System.out.print("*");
             }
             System.out.println();
@@ -246,7 +244,7 @@ public class Patterns {
             for (int j = 0; j < 2 * i + 1; j++){
                 System.out.print("*");
             }
-            
+
             for (int j = 0; j < rows - i - 1; j++){
                 System.out.print(" ");
             }
@@ -266,6 +264,7 @@ public class Patterns {
             for (int j = 0; j < i; j++){
                 System.out.print(" ");
             }
+
             System.out.println();
         }
     }
@@ -275,7 +274,7 @@ public class Patterns {
             for (int j = 0; j < rows - i; j++){
                 System.out.print("*");
             }
-            
+
             for (int j = 0; j < 2 * i; j++){
                 System.out.print(" ");
             }
@@ -288,15 +287,15 @@ public class Patterns {
         }
 
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
+            for (int j = 0; j <= i; j++){
                 System.out.print("*");
             }
-            
+
             for (int j = 0; j < 2 * (rows - i - 1); j++){
                 System.out.print(" ");
             }
 
-            for (int j = 0; j < i + 1; j++){
+            for (int j = 0; j <= i; j++){
                 System.out.print("*");
             }
 
@@ -306,7 +305,7 @@ public class Patterns {
 
     public static void pattern_20(int rows){
         for (int i = 0; i < rows; i++){
-            for (int j = 0; j < i + 1; j++){
+            for (int j = 0; j <= i; j++){
                 System.out.print("*");
             }
 
@@ -314,13 +313,13 @@ public class Patterns {
                 System.out.print(" ");
             }
 
-            for (int j = 0; j < i + 1; j++){
+            for (int j = 0; j <= i; j++){
                 System.out.print("*");
             }
 
             System.out.println();
-        }   
-        
+        }
+
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < rows - i - 1; j++){
                 System.out.print("*");
@@ -330,29 +329,45 @@ public class Patterns {
                 System.out.print(" ");
             }
 
-            for (int j = 0; j < rows - i - 1; j++){
+            for (int j = 0; j <  rows - i - 1; j++){
                 System.out.print("*");
             }
 
             System.out.println();
-        }    
+        }
     }
 
-    public static void pattern_21(int rows){
+    public static void pattern_21(int rows) {
+        int size = 2 * rows - 1;
+    
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
 
+                int distance = Math.min(Math.min(i, j), Math.min(size - 1 - i, size - 1 - j));
+                int num = rows - distance;
+                System.out.print(num);
+            }
+            System.out.println();
+        }
     }
+    
+    
 
     public static void pattern_22(int rows){
         for (int i = 0; i < rows; i++){
             if (i == 0){
-                for (int j = 0; j < rows - 1; j++){
+                for (int j = 0; j < rows; j++){
                     System.out.print("*");
                 }
-            } else if (i == (rows - 1)){
-                for (int j = 0; j < rows - 1; j++){
+
+                System.out.println();
+            }
+            else if (i == rows - 1){
+                for (int j = 0; j < rows; j++){
                     System.out.print("*");
                 }
-            } else {
+            }
+            else {
                 System.out.print("*");
 
                 for (int j = 0; j < rows - 2; j++){
@@ -360,9 +375,8 @@ public class Patterns {
                 }
 
                 System.out.print("*");
+                System.out.println();
             }
-
-            System.out.println();
         }
     }
 }
