@@ -1,3 +1,6 @@
+<font color="#7f7f7f"><em>Friday, 01-11-2024 - 15:28</em></font>
+#programming #dsa 
+
 ### Programming Languages Fundaments
 ##### User Input/Output
 In Java we have two classes for I/O operations, Scanner and BufferedReader (better for complex input scenarios and large volumes of data).
@@ -32,16 +35,26 @@ public class Main {
 
 ##### Time Complexity
 
+##### Space Complexity
+
+---
 ### Logical Thinking - Patterns
 Being able to analyse problems and notice common patterns is very important in DSA. Mastering these patterns allows us to be able to approach other problems easily.
 
-##### 4 Rules for solving patterns
+##### <u>4 Rules for solving patterns</u>
 1. For the outer loop, count the number of rows.
-2. For the inner loop, focus on the columns and somehow connect them to the rows.
+2. For the inner loop, focus on the columns and somehow connect them to the rows (e.g. space-star-space will need 3 different inner loops with a different relation between columns/lines).
 3. Whatever you're printing, print it inside the inner loop.
-4. Observe symmetry in some patterns (optional).
+4. Observe symmetry in some patterns.
 
 ##### Exercises - Important Takeaways
+- How to alternate between 0 and 1? -> `n = 1 - n`.
+- How to output the sum of a char with an integer? -> `(char)('A' + i)`.
+- For pyramids, count the number of stars, find the relation with the number of columns and math it out.
+- Pyramids 'star/characters' output count -> `j < 2*i+1`.
+- Pyramids 'spaces' output count -> `j < rows-i-1`.
+![[Algorithm Patterns| 1000 | center]]
+
 <u>Square 1</u> - The number of columns is the same as of rows.
 ```java
 for (int i = 0; i < rows; i++){
@@ -63,7 +76,11 @@ for (int i = 0; i < rows; i++){
 <u>Inverted Right-Angled Triangle 5</u> - The number of stars per line is the number of total rows - the current row - 1 (reverse direction of rows => from 4 to 0 instead of 0 to 4).
 ```java
 for (int i = 0; i < rows; i++){
-	for (int j = 0; j < rows - i - 1; j++) { System.out.Print("*"); }
+	for (int j = 0; j < rows - i; j++) { System.out.Print("*"); }
+}
+
+for (int i = 0; i < rows; i++){ 
+	for (int j = i; j < rows; j++) { System.out.print("*"); }
 }
 
 for (int i = rows; i >= 1; i--){ 
@@ -71,18 +88,18 @@ for (int i = rows; i >= 1; i--){
 }
 ```
 
-<u>Pattern 6</u> - For each row print the column numbers (j+1).
+<u>Pattern 6</u> - For each row print the column numbers (j+1). Note that you need to do `for (int j = 0; j < rows - i; j++)` in order to print (j+1), if not, the second line prints: `2345` instead of `1234`.
 
 <u>Pattern 7</u> - Odd rows start with 1 while even rows start with 0, on top of that it alternates the printed value between 0 and 1.
 ```java
 int n;
 for (int i = 0; i < rows; i++){
-	if ((i + 1) % 2 == 0){ n = 1; }
-	else { n = 0; }
+	if (i % 2 == 0){ n = 0; }
+	else { n = 1; }
 
 	for (int j = 0; j < rows; j++){
-		n = n - 1;    // alternates between 0 and 1
 		System.out.print(n);
+		n = n - 1;    // alternates between 1 and 0
 	}
 	System.out.println();
 }
@@ -99,8 +116,18 @@ for (int i = 0; i < rows; i++){
 ```java
 for (int i = 0; i < rows; i++){
 	for (int j = 0; j < rows - i - 1; j++){ System.out.print(" "); }
+	
 	for (int j = 0; j < i + 1; j++){ System.out.print((char)('A' + j)); }
 	for (int j =  i; j > 0; j--){ System.out.print((char)('A' + j - 1)); }
+
+	or 
+
+	char ch = 'A';
+	for (int j = 1; j <= 2 * i + 1; j++){
+		System.out.print(A);
+		if (j <= ((2*i+1) / 2)){ ch++; } else { ch--; }
+	}
+
 	for (int j = 0; j < rows - i - 1; j++){ System.out.print(" "); }
 }
 ```
@@ -183,86 +210,64 @@ for (int i = 1; i > 0; i++){    // i starts on 1 to skip the first line
 
 <u>Pattern 19</u> - Check for symmetry rows = 5.
 
-![[Algorithm Patterns| 1000 | center]]
-
+---
 ### Java Collections
 Java supports a wide variety of data structures and the base class for that is **Collection**.
 An "extra" common Collection method is <u>toArray()</u> - Converts the collection to an array.
-##### Lists
-Allows duplicates and preserves insertion order (ArrayList, LinkedList).
-```java
-List<Integer> arrayList = new ArrayList<>();  // Resizable array, faster for random access
 
-List<String> linkedList = new LinkedList<>();  // Faster insertions and deletions at the beginning or end
-```
+##### ArrayList
 
-| Methods                     | Description                                                                                           |
-| --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| add(element)                | Adds an element at the end of the list.                                                               |
-| add(index, element)         | Adds an element at a specific position.                                                               |
-| get(index)                  | Returns the element at the specified index.                                                           |
-| remove(index)               | Removes the element at the specified index.                                                           |
-| indexOf(element)            | Returns the first index of the specified element, or `-1` if not found.                               |
-| lastIndexOf(element)        | Returns the last index of the specified element.                                                      |
-| subList(fromIndex, toIndex) | Returns a view of the portion of this list between `fromIndex` (inclusive) and `toIndex` (exclusive). |
-| set(index, element)         | Replaces the element at the specified index.                                                          |
+| Method                      | Description                                              |     Time Complexity      |
+| --------------------------- | -------------------------------------------------------- | :----------------------: |
+| add(element)                | Appends to the end of the list                           |           O(1)           |
+| get(index)                  | Retrieves the element at specified index                 |           O(1)           |
+| set(index, element)         | Replaces the element at specified index                  |           O(1)           |
+| remove(index)               | Removes the element at index                             |           O(N)           |
+| remove(element)             | Removes the first occurrence of the element              | O(N) - shifting elements |
+| size()                      | Returns the number of elements                           |           O(1)           |
+| isEmpty()                   | Checks if the list is empty                              |           O(1)           |
+| clear()                     | Removes all elements                                     |           O(N)           |
+| contains(element)           | Check if the list contains the element                   |           O(N)           |
+| indexOf(element)            | Returns the index of the first occurrence of the element |           O(N)           |
+| lastIndexOf(element)        | Returns the index of the last occurrence of the element  |           O(N)           |
+| addAll(collection)          | Adds all elements to the list                            |  O(M) - collection size  |
+| subList(fromIndex, toIndex) | Returns the specified sub-list                           |           O(N)           |
+| toArray()                   | Converts the list to an array                            |           O(N)           |
 
-##### Sets
-Does not allow duplicates (HashSet, LinkedHashSet, TreeSeet).
-```java
-Set<Integer> hashSet = new HashSet<>();    // Does not maintain any order
+##### Set/HashSet
+Does not store repeated values.
 
-// LinkedHashSet: Maintains insertion order
-// TreeSet: Maintains sorted order
-```
+| Method                  | Description                                                    |         Time Complexity          |
+| ----------------------- | -------------------------------------------------------------- | :------------------------------: |
+| add(element)            | Adds element if not present                                    | O(1) - average O(N) - worst case |
+| contains(element)       | Checks if the set contains the element                         | O(1) - average O(N) - worst case |
+| remove(element)         | Removes the element                                            | O(1) - average O(N) - worst case |
+| size()                  | Returns the number of elements                                 |               O(1)               |
+| isEmpty()               | Checks if the set is empty                                     |               O(1)               |
+| clear()                 | Removes all elements                                           |               O(N)               |
+| containsAll(collection) | Checks if the set contains all elements                        |               O(N)               |
+| addAll(collection)      | Adds all elements                                              |               O(N)               |
+| removeAll(collection)   | Removes all elements                                           |               O(N)               |
+| retainAll(collection)   | Retains only the elements that are contained in the collection |               O(N)               |
 
-| Methods                            | Description                                                                           |
-| ---------------------------------- | ------------------------------------------------------------------------------------- |
-| add(element)                       | Adds an element if it is not already present.                                         |
-| remove(index)                      | Removes the specified element from the set.                                           |
-| contains(element)                  | Returns `true` if the set contains the specified element.                             |
-| addAll(Collection< ? extends E> c) | Adds all of the elements from the specified collection to this set.                   |
-| retainAll(Collection< ? > c)       | Retains only the elements in this set that are contained in the specified collection. |
-| removeAll(Collection < ? > c)      | Removes all elements in this set that are also in the specified collection.           |
-| clear()                            | Removes all elements from the set.                                                    |
+##### Map/HashMap
+Does not store repeated values.
 
-##### Maps
-Stores key-value pairs and does not extend Collection (HashMap, TreeMap, LinkedHashMap).
-```java
-Map<String, Integer> hashMap = new HashMap<>();  // Stores elements in a hash table, does not maintain order
+| Method                | Description                                                 |         Time Complexity          |
+| --------------------- | ----------------------------------------------------------- | :------------------------------: |
+| put(key, value)       | Adds an entry to the map                                    | O(1) - average O(N) - worst case |
+| get(key)              | Retrieves the value for the key                             | O(1) - average O(N) - worst case |
+| containsKey(key)      | Checks if the map contains the key                          | O(1) - average O(N) - worst case |
+| constainsValue(value) | Checks if the map contains the  value                       |               O(N)               |
+| remove(key)           | Removes the entry for the key                               | O(1) - average O(N) - worst case |
+| size()                | Returns the number of entries in the map                    |               O(1)               |
+| isEmpty()             | Checks if the map is empty                                  |               O(1)               |
+| clear()               | Removes all entries                                         |               O(N)               |
+| keySet()              | Returns a set of all keys                                   |               O(N)               |
+| values()              | Returns a collection of all values                          |               O(N)               |
+| entrySet()            | Returns a set of all key-value pairs (Map.Entry) in the map |               O(N)               |
 
-// TreeMap: Sorted map based on keys
-// LinkedHashMap: Maintains insertion order
-```
-
-| Methods                          | Description                                                                             |
-| -------------------------------- | --------------------------------------------------------------------------------------- |
-| put(key, value)                  | Associates the specified value with the specified key.                                  |
-| putIfAbsent(key, value)          | Associates the specified value with the specified key if it’s not already mapped.       |
-| get(key)                         | Returns the value associated with the specified key, or `null` if not found.            |
-| remove(key)                      | Removes the mapping for the specified key.                                              |
-| containsKey(key)                 | Returns `true` if the map contains the specified key.                                   |
-| containsValue(value)             | Returns `true` if the map maps one or more keys to the specified value.                 |
-| keySet()                         | Returns a `Set` view of the keys contained in this map.                                 |
-| values()                         | Returns a `Collection` view of the values contained in this map.                        |
-| entrySet()                       | Returns a `Set` view of the mappings contained in this map.                             |
-| replace(key, oldValue, newValue) | Replaces the entry for the specified key only if currently mapped to a specified value. |
-##### Queues
-Follows FIFO (First-In-First-Out) (LinkedList, PriorityQueue).
-```java
-Queue<Integer> queue = new LinkedList<>();  // LinkedList implements Queue and Dequeue
-
-// PriorityQueue: Elements are ordered based on priority
-```
-
-| Methods                     | Description                                                                                               |
-| --------------------------- | --------------------------------------------------------------------------------------------------------- |
-| add(element)                | Adds an element at the end of the queue; throws an exception if the queue is full.                        |
-| offer(element)              | Adds an element at the end of the queue; returns `false` if the queue is full (useful in bounded queues). |
-| poll()                      | Retrieves and removes the head of the queue; returns `null` if the queue is empty.                        |
-| remove()                    | Retrieves and removes the head of the queue; throws an exception if the queue is empty.                   |
-| peek()                      | Retrieves but does not remove the head of the queue; returns `null` if the queue is empty.                |
-| element()                   | Retrieves but does not remove the head of the queue; throws an exception if the queue is empty.           |
+---
 ### Mathematics Basics
 ##### Digits Counting and Extraction
 In many algorithms we need to manage each digit of a number individually.
@@ -314,6 +319,7 @@ else { gcd = a; }
 ```
 This algorithm has time complexity of O( log_phy(min(a, b)) ).
 
+---
 ### Recursion Basics
 Recursion is when a function calls itself until a specified condition is met. 
 A problem we can easily face is a segmentation fault (stack overflow) if we loop a recursive function without a proper break condition.
@@ -375,6 +381,7 @@ public static int fibonacci(int n){
 ![[Fibonacci Recursion Tree| 1000 | center]]
 <u>TIME COMPLEXITY</u>: Fibonacci is O(~2^n) - exponential nature.
 
+---
 ### Hashing Basics
 ##### Hashing
 Hashing is a technique used to efficiently map data to fixed-size values, often called hash codes. It's often preferred over linear search due to it having a time complexity of O(1) of search.
