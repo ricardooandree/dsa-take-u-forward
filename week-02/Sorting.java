@@ -122,24 +122,25 @@ public class Sorting {
 
     
     public static void recursiveBubbleSort(int[] array, int n){
-        // Base Case
-        if (n == array.length){
+        // base case
+        if (n == 1){
             return;
         }
 
         boolean swapped = false;
-        for (int i = 0; i < array.length - 1 - n; i++){
+
+        for (int i = 0; i < n - 1; i++){
             if (array[i] > array[i+1]){
                 int temp = array[i];
                 array[i] = array[i+1];
                 array[i+1] = temp;
-
                 swapped = true;
             }
         }
 
-        if (!swapped){ return; }
-        recursiveBubbleSort(array, n + 1);
+        if (!swapped) { return; }
+        
+        recursiveBubbleSort(array, n - 1);
     }
 
     
@@ -169,14 +170,10 @@ public class Sorting {
     
         while (i <= j) {  // i and j must not cross over
             // Move i to the right while array[i] is less than or equal to pivot
-            while (i <= high && array[i] <= pivot) {
-                i++;
-            }
+            while (i <= high && array[i] <= pivot) { i++; }
     
             // Move j to the left while array[j] is greater than pivot
-            while (array[j] > pivot && j >= low) {
-                j--;
-            }
+            while (array[j] > pivot && j >= low) { j--; }
     
             // If i and j haven't crossed, swap array[i] and array[j]
             if (i < j) {
