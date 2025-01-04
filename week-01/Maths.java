@@ -1,7 +1,7 @@
 public class Maths {
     public static void main(String args[]){
         countDigits(7789);
-        reverseNumber(10400);
+        reverseNumber(7789);
         checkPalindrome(121);
         armstrongNumber(371);
         divisors(36);
@@ -10,56 +10,60 @@ public class Maths {
     }
 
     public static void countDigits(int n){
-        int counter = 0;
+        int count = 0;
+
         while (n > 0){
-            n = n / 10;
-            counter++;
+            count++;
+            n /= 10;
         }
 
-        System.out.println(counter);
+        System.out.println("Digits: " + count);
     }
 
     public static void reverseNumber(int n){
-        int digit;
         int reverse = 0;
 
         while (n > 0){
-            digit = n % 10;
-            n = n / 10;
-
+            int digit = n % 10;
             reverse = (reverse * 10) + digit;
+            n /= 10;
         }
-        System.out.println(reverse);
+
+        System.out.println("Reverse: " + reverse);
     }
 
     public static void checkPalindrome(int n){
-        int digit;
         int reverse = 0;
         int original = n;
 
-        while(n > 0){
-            digit = n % 10;
-            n = n / 10;
-
+        while (n > 0){
+            int digit = n % 10;
             reverse = (reverse * 10) + digit;
+            n /= 10;
         }
 
-        System.out.println(reverse == original);
+        if (reverse == original){
+            System.out.println("Palindrome");
+        } else {
+            System.out.println("Not Palindrome");
+        }
     }
 
     public static void armstrongNumber(int n){
-        int digit;
         int armstrong = 0;
         int original = n;
 
         while (n > 0){
-            digit = n % 10;
-            n = n /10;
-
+            int digit = n % 10;
             armstrong = armstrong + (digit * digit * digit);
+            n /= 10;
         }
 
-        System.out.println(original == armstrong);
+        if (armstrong == original){
+            System.out.println("Armstrong");
+        } else {
+            System.out.println("Not Armstrong");
+        }
     }
 
     public static void divisors(int n){
@@ -73,31 +77,34 @@ public class Maths {
 
     public static void prime(int n){
         int count = 0;
+        
         for (int i = 1; i <= n; i++){
-            if (n % i == 0) {
+            if (n % i == 0){
                 count++;
             }
         }
 
-        System.out.println(count == 2);
+        if (count > 2){
+            System.out.println("Not Prime");
+        } else {
+            System.out.println("Prime");
+        }
     }
 
     public static void gcd(int n1, int n2){
-        int gcd = 1;
-        int min = 0;
+        int min = n1;
+        int divisor = 1;
 
-        if (n1 > n2){
+        if (n2 < n1){
             min = n2;
-        } else {
-            min = n1;
         }
 
         for (int i = 1; i <= min; i++){
             if ((n1 % i == 0) && (n2 % i == 0)){
-                gcd = i;
+                divisor = i;
             }
         }
 
-        System.out.println(gcd);
+        System.out.println("GCD: " + divisor);
     }
 }
